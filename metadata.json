@@ -1,6 +1,6 @@
 {
-  "name": "Design & QA Landing Page",
-  "description": "Uma landing page de alta fidelidade desenvolvida com o design system inspirado na Globant, focando no papel do Design e QA como aliados de velocidade e qualidade.",
+  "name": "Design & QA",
+  "description": "Uma página com conteúdo focando no papel do Design e QA como aliados de velocidade e qualidade.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

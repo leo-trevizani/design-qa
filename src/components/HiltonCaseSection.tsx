@@ -23,7 +23,7 @@ export default function HiltonCaseSection() {
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-600/10 text-red-600 text-[10px] md:text-xs font-mono font-bold tracking-wider uppercase mb-5 w-fit border border-red-200"
           >
             <EyeOff className="w-3.5 h-3.5" />
-            <span>{t.hiltonCase.tag}</span>
+            <span>{t.hilton.tag}</span>
           </motion.div>
 
           <motion.h2 
@@ -33,7 +33,7 @@ export default function HiltonCaseSection() {
             transition={{ delay: 0.1 }}
             className="font-heebo text-4xl md:text-5xl lg:text-6xl font-black text-black tracking-tight leading-tight mb-6"
           >
-            {t.hiltonCase.title}
+            {t.hilton.title}
           </motion.h2>
 
           <motion.div 
@@ -44,24 +44,24 @@ export default function HiltonCaseSection() {
             className="space-y-4 font-sans text-sm md:text-base text-gray-600 leading-relaxed"
           >
             <p>
-              {t.hiltonCase.p1}
+              {t.hilton.p1}
             </p>
             <p>
-              {t.hiltonCase.p2}
+              {t.hilton.p2}
             </p>
             <p className="bg-[#1E2225] text-[#D8DEE9] p-3 rounded-lg font-mono text-[11px] border border-white/5 shadow-inner">
-              <span className="text-[#A3BE8C]">✓</span> {t.hiltonCase.ciLineButton} <span className="text-gray-500">// PASSED</span>
+              <span className="text-[#A3BE8C]">✓</span> {t.hilton.ciLine2} <span className="text-gray-500">// PASSED</span>
               <br />
-              <span className="text-[#A3BE8C]">✓</span> {t.hiltonCase.ciLineOnclick} <span className="text-gray-500">// PASSED</span>
+              <span className="text-[#A3BE8C]">✓</span> {t.hilton.ciLine3} <span className="text-gray-500">// PASSED</span>
             </p>
             <p>
-              {t.hiltonCase.codeNoteSub}
+              {t.hilton.testLabel}
             </p>
             <p className="border-l-4 border-[#DE3B3B] pl-4 italic text-gray-700 bg-red-500/5 py-2">
-              {t.hiltonCase.quote}
+              {t.hilton.qaAbsolution}
             </p>
             <p className="font-semibold text-black">
-              {t.hiltonCase.summary}
+              {t.hilton.summary}
             </p>
           </motion.div>
         </div>
@@ -76,11 +76,11 @@ export default function HiltonCaseSection() {
           >
             <div className="flex border-b border-[#DEE2E6] pb-4 mb-6 items-center justify-between">
               <div>
-                <h3 className="text-sm font-black text-black">{t.hiltonCase.sandboxTitle}</h3>
-                <p className="text-[10px] text-gray-400 font-mono">{t.hiltonCase.sandboxSub}</p>
+                <h3 className="text-sm font-black text-black">{t.hilton.sandboxTitle}</h3>
+                <p className="text-[10px] text-gray-400 font-mono">{t.hilton.sandboxSub}</p>
               </div>
             </div>
-
+ 
             {/* Toggle Environment Selectors */}
             <div className="flex gap-2 mb-6">
               <button 
@@ -88,37 +88,37 @@ export default function HiltonCaseSection() {
                 className={`flex-1 py-3 px-4 rounded-xl font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 border cursor-pointer ${deviceEnvironment === "ci" ? 'bg-black text-lime-green border-black' : 'bg-gray-100 text-gray-500 border-[#DEE2E6] hover:text-black'}`}
               >
                 <Terminal className="w-4 h-4" />
-                <span>{t.hiltonCase.btnCi}</span>
+                <span>{t.hilton.btnCi}</span>
               </button>
               <button 
                 onClick={() => setDeviceEnvironment("sunlight")}
                 className={`flex-1 py-3 px-4 rounded-xl font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 border cursor-pointer ${deviceEnvironment === "sunlight" ? 'bg-amber-100 text-amber-900 border-amber-300' : 'bg-gray-100 text-gray-500 border-[#DEE2E6] hover:text-black'}`}
               >
                 <Sun className="w-4 h-4 animate-spin-slow text-amber-600" />
-                <span>{t.hiltonCase.btnSun}</span>
+                <span>{t.hilton.btnSunlight}</span>
               </button>
             </div>
-
+ 
             {/* Display View Screen */}
             <div className="border border-[#DEE2E6] rounded-xl overflow-hidden shadow-inner bg-gray-50 p-6 relative min-h-[220px] flex flex-col justify-between transition-all duration-500">
               {deviceEnvironment === "ci" ? (
                 <>
                   {/* Console logs showing green state */}
                   <div className="w-full text-left font-mono text-[11px] text-emerald-800 space-y-1 mb-8">
-                    <p className="text-gray-500">{t.hiltonCase.ciLabel}</p>
-                    <p className="font-bold text-emerald-600">{t.hiltonCase.ciPass}</p>
-                    <p>✓ button exists in body [2ms]</p>
-                    <p>✓ textContent contains "{t.hiltonCase.ciLineButton}" [1ms]</p>
-                    <p>✓ onclick handler is associated [4ms]</p>
-                    <p className="text-gray-500">&gt; {t.hiltonCase.ciFooter}</p>
+                    <p className="text-gray-500">{t.hilton.ciExecuting}</p>
+                    <p className="font-bold text-emerald-600">{t.hilton.ciPassed}</p>
+                    <p>{t.hilton.ciLine1}</p>
+                    <p>{t.hilton.ciLine2}</p>
+                    <p>{t.hilton.ciLine3}</p>
+                    <p className="text-gray-500">{t.hilton.ciMarkup}</p>
                   </div>
-
+ 
                   {/* Standard high contrasted mockup of button because we output plain DOM state inside a console */}
                   <div className="w-full bg-[#ECF0F1] p-3 rounded-lg border border-gray-300 flex justify-between items-center text-xs">
-                    <span className="font-bold text-gray-700">{t.hiltonCase.ciMockTitle}</span>
+                    <span className="font-bold text-gray-700">{t.hilton.checkoutLabel}</span>
                     {/* The code sees raw DOM - represented schematically as perfectly clear */}
                     <span className="px-3 py-1.5 bg-[#4F5B66] text-white rounded font-bold">
-                      {t.hiltonCase.sunLostButtonText}
+                      {t.hilton.confirmReservation}
                     </span>
                   </div>
                 </>
@@ -127,36 +127,36 @@ export default function HiltonCaseSection() {
                   {/* Human display perspective under strong ambient daylight */}
                   <div className="absolute inset-0 bg-[#FFFFF6]/40 flex flex-col justify-between p-6 select-none animate-pulse">
                     <div className="font-mono text-[9px] text-amber-800 flex justify-between items-center border-b border-amber-200 pb-1.5">
-                      <span>{t.hiltonCase.sunLabel}</span>
-                      <span className="font-extrabold text-[#DE3B3B]">{t.hiltonCase.sunContrastRatio}</span>
+                      <span>{t.hilton.luminosity}</span>
+                      <span className="font-extrabold text-[#DE3B3B]">{t.hilton.contrastRatio}</span>
                     </div>
-
+ 
                     {/* Faded washed-out smartphone hotel mockup */}
                     <div className="max-w-xs mx-auto w-full p-4 bg-[#FFFAFA] border-2 border-red-400 rounded-lg text-left shadow-sm mt-2">
-                      <span className="text-[10px] text-gray-400 block mb-1">{t.hiltonCase.sunPriceLabel}</span>
-                      <span className="text-base font-black text-gray-350 block mb-3">R$ 2.450 / Noite</span>
-
+                      <span className="text-[10px] text-gray-400 block mb-1">{t.hilton.totalPrice}</span>
+                      <span className="text-base font-black text-gray-350 block mb-3">{t.hilton.priceValue}</span>
+ 
                       <div className="flex gap-2">
                         {/* THE WASHED BUTTON: White text over extremely light grey/silver background button - virtually zero separation */}
                         <div className="flex-grow py-3 bg-[#EAEAEA] text-[#FFFFFF] rounded text-center text-[10px] font-extrabold tracking-wider pointer-events-none transition-all border border-gray-150 relative">
-                          <span className="blur-[0.5px]">{t.hiltonCase.sunLostButtonText}</span>
+                          <span className="blur-[0.5px]">{t.hilton.confirmReservation}</span>
                           <span className="absolute inset-0 bg-white/20" />
                         </div>
                       </div>
                       
                       <span className="text-[8px] text-[#DE3B3B] font-bold text-center block mt-2 animate-bounce">
-                        {t.hiltonCase.sunLostError}
+                        {t.hilton.whereIsButton}
                       </span>
                     </div>
                   </div>
                 </>
               )}
             </div>
-
+ 
             {/* Diagnostic Conclusion footer */}
             <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-left text-gray-500 mt-6 border-t border-gray-200 pt-4 flex gap-2 items-center">
               <ShieldAlert className="w-4 h-4 text-amber-500" />
-              <span>{t.hiltonCase.diagnostic}</span>
+              <span>{t.hilton.diagnostic}</span>
             </div>
           </motion.div>
         </div>

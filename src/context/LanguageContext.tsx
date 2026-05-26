@@ -25,7 +25,7 @@ const translations = {
       titleLine1: "Unificar Design & Qualidade é o único",
       titleLine2: "caminho para um produto flawless",
       desc: "Como designer de produto, meu objetivo é apoiar vocês com tokens bem-definidos, componentes no Storybook e total suporte técnico. Vamos marcar um papo para debater como automatizar nosso fluxo de validação e zerar retrabalhos visuais na nossa esteira?",
-      button: "Agendar Bate-papo de Alinhamento"
+      button: "Send me a Star"
     },
     hero: {
       agenda: "PAUTA DA GUILDA • COOPERAÇÃO DESIGN & QUALIDADE",
@@ -295,7 +295,7 @@ const translations = {
       titleLine1: "Unificar Diseño y Calidad es el único",
       titleLine2: "camino hacia un producto impecable",
       desc: "Como diseñador de productos, mi objetivo es apoyarlos con tokens bien definidos, componentes en Storybook y soporte técnico completo. ¿Agendamos una charla para debatir cómo automatizar nuestro flujo de validación y eliminar los retrabajos visuales en nuestro flujo de desarrollo?",
-      button: "Agendar Charla de Alineación"
+      button: "Send me a Star"
     },
     hero: {
       agenda: "TEMARIO DEL GREMIO • COOPERACIÓN DISEÑO Y CALIDAD",
