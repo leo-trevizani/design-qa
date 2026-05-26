@@ -8,8 +8,11 @@ import ShiftLeftSection from "./components/ShiftLeftSection";
 import AutomationSection from "./components/AutomationSection";
 import StrategicQASection from "./components/StrategicQASection";
 import ContactModal from "./components/ContactModal";
+import { useLanguage } from "./context/LanguageContext";
+import { Globe } from "lucide-react";
 
 export default function App() {
+  const { language, setLanguage, t } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0); // 1 = down/next, -1 = up/prev
   const [isContactOpen, setIsContactOpen] = useState(false);
@@ -19,17 +22,9 @@ export default function App() {
   const openContactModal = () => setIsContactOpen(true);
   const closeContactModal = () => setIsContactOpen(false);
 
-  // Slide list metadata for progress indicators (8 sections total)
-  const slides = [
-    { id: 0, label: "Hero Capa", title: "Capa" },
-    { id: 1, label: "Realidade WYSIATI", title: "WYSIATI" },
-    { id: 2, label: "Design Debt", title: "Dívida de Design" },
-    { id: 3, label: "Estudo Hilton", title: "Caso Hilton" },
-    { id: 4, label: "Metodologia Shift-Left", title: "Design QA" },
-    { id: 5, label: "VRT Automação", title: "Automação" },
-    { id: 6, label: "Desafio QE", title: "QE Estratégico" },
-    { id: 7, label: "Contato CTA", title: "Contato" }
-  ];
+  // Slide list metadata for progress indicators (8 sections total) - translated
+  const slides = t.slides;
+
 
   // Debounced wheel listener to prevent multiple accidental skips
   useEffect(() => {
@@ -247,21 +242,21 @@ export default function App() {
                     {/* Visual Call To Action Block */}
                     <div className="max-w-4xl mx-auto text-center px-6 py-12 md:py-16 z-10 flex flex-col justify-center items-center">
                       <span className="text-xs font-bold uppercase tracking-widest text-lime-green bg-lime-green/10 px-4 py-1.5 rounded-full border border-lime-green/20 mb-6">
-                        VAMOS CONSTRUIR ESSA ALIANÇA?
+                        {t.ctaSection.tag}
                       </span>
                       <h2 className="font-heebo text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-6 flex flex-col gap-2">
-                        <span>Unificar Design & Qualidade é o único</span>
-                        <span>caminho para um produto flawless</span>
+                        <span>{t.ctaSection.titleLine1}</span>
+                        <span>{t.ctaSection.titleLine2}</span>
                       </h2>
                       <p className="font-heebo text-xs sm:text-sm text-gray-400 max-w-xl mx-auto mb-8 leading-relaxed">
-                        Como designer de produto, meu objetivo é apoiar vocês com tokens bem-definidos, componentes no Storybook e total suporte técnico. Vamos marcar um papo para debater como automatizar nosso fluxo de validação e zerar retrabalhos visuais na nossa esteira?
+                        {t.ctaSection.desc}
                       </p>
                       
                       <button 
                         onClick={openContactModal}
                         className="px-10 py-4 bg-lime-green hover:bg-lime-hover text-black font-extrabold text-xs tracking-wider uppercase rounded-full shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all text-center cursor-pointer"
                       >
-                        Agendar Bate-papo de Alinhamento
+                        {t.ctaSection.button}
                       </button>
                     </div>
                   </div>
@@ -270,6 +265,23 @@ export default function App() {
             </div>
           </motion.div>
         </AnimatePresence>
+      </div>
+
+      {/* Floating Language Selector in Top Right */}
+      <div className="fixed top-6 right-6 z-50 flex items-center gap-1 bg-white/95 backdrop-blur-md border border-[#DEE2E6] py-1 px-1.5 rounded-full shadow-globant-default">
+        <Globe className="w-3.5 h-3.5 text-gray-400 ml-1.5" />
+        <button 
+          onClick={() => setLanguage("pt")}
+          className={`px-2.5 py-1 text-[10px] font-black tracking-wider rounded-full transition-all cursor-pointer ${language === "pt" ? 'bg-black text-white shadow-sm' : 'text-gray-400 hover:text-black'}`}
+        >
+          PT
+        </button>
+        <button 
+          onClick={() => setLanguage("es")}
+          className={`px-2.5 py-1 text-[10px] font-black tracking-wider rounded-full transition-all cursor-pointer ${language === "es" ? 'bg-black text-white shadow-sm' : 'text-gray-400 hover:text-black'}`}
+        >
+          ES
+        </button>
       </div>
 
       {/* Persistent horizontal progress bar at the very bottom */}

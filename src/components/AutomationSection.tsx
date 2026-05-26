@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Cpu, ShieldCheck, Zap, GitCommit, PlayCircle, Eye } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function AutomationSection() {
+  const { t } = useLanguage();
   const [isScanning, setIsScanning] = useState(false);
   const [scanState, setScanState] = useState<"idle" | "scanning" | "diff" | "approved">("idle");
 
@@ -35,7 +37,7 @@ export default function AutomationSection() {
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lime-green/20 text-[#5B7910] text-[10px] md:text-xs font-mono font-bold tracking-wider uppercase mb-5 w-fit border border-lime-green/35"
           >
             <Cpu className="w-3.5 h-3.5 text-lime-active" />
-            <span>PERCEPTUAL AI • VRT AUTOMATION</span>
+            <span>{t.automation.tag}</span>
           </motion.div>
 
           <motion.h2 
@@ -45,7 +47,7 @@ export default function AutomationSection() {
             transition={{ delay: 0.1 }}
             className="font-heebo text-4xl md:text-5xl lg:text-6xl font-black text-black tracking-tight leading-tight mb-6"
           >
-            Automação Como Libertação
+            {t.automation.title}
           </motion.h2>
 
           <motion.div 
@@ -56,16 +58,16 @@ export default function AutomationSection() {
             className="space-y-4 font-sans text-sm md:text-base text-gray-600 leading-relaxed"
           >
             <p>
-              Nenhum Engenheiro de Qualidade de Software (QE) deveria perder horas de vida contando pixels manualmente ou usando réguas digitais sobre telas estáticas. <strong>Isso é engenharia obsoleta e exaustiva.</strong>
+              {t.automation.desc1}
             </p>
             <p className="border-l-4 border-lime-green pl-4 my-4 italic text-gray-700 bg-lime-green/5 py-2">
-              "A verdadeira automação visual em escala utiliza Perceptual AI para dar superpoderes à guilda de engenharia."
+              {t.automation.desc2}
             </p>
             <p>
-              Acoplamos testes de <strong className="text-black font-semibold">Regressão Visual Automatizada (VRT)</strong> diretamente no Git CI/CD. Ferramentas eficientes como <strong>Chromatic ou Percy</strong> renderizam as telas na nuvem a cada push de Pull Request.
+              {t.automation.desc3}
             </p>
             <p>
-              O sistema compara de forma autônoma a versão anterior à nova, destacando qualquer desvio milimétrico de pixel em contraste magenta choque. O QE não precisa procurar o erro; a máquina cospe o relatório em segundos.
+              {t.automation.desc4}
             </p>
           </motion.div>
         </div>
@@ -80,8 +82,8 @@ export default function AutomationSection() {
           >
             <div className="flex border-b border-[#DEE2E6] pb-4 mb-4 justify-between items-center">
               <div>
-                <h3 className="text-xs font-black text-black">Perceptual Engine Checker</h3>
-                <p className="text-[9px] font-mono text-gray-400">PULL REQUEST GITHUB VERIFICATION #1059</p>
+                <h3 className="text-xs font-black text-black">{t.automation.sandboxTitle}</h3>
+                <p className="text-[9px] font-mono text-gray-400">{t.automation.sandboxSub}</p>
               </div>
               <div className="flex gap-2">
                 {scanState === "idle" && (
@@ -89,7 +91,7 @@ export default function AutomationSection() {
                     onClick={startVisualScan}
                     className="px-3 py-1.5 bg-black hover:bg-neutral-800 text-lime-green font-mono text-[10px] font-bold rounded flex items-center gap-1 cursor-pointer transition-all"
                   >
-                    <PlayCircle className="w-3.5 h-3.5" /> Rodar VRT Scan
+                    <PlayCircle className="w-3.5 h-3.5" /> {t.automation.btnScan}
                   </button>
                 )}
                 {scanState === "diff" && (
@@ -97,12 +99,12 @@ export default function AutomationSection() {
                     onClick={approvePR}
                     className="px-3 py-1.5 bg-lime-green text-black font-mono text-[10px] font-extrabold rounded flex items-center gap-1 cursor-pointer transition-all hover:bg-lime-hover"
                   >
-                    <ShieldCheck className="w-3.5 h-3.5" /> Aceitar Variação
+                    <ShieldCheck className="w-3.5 h-3.5" /> {t.automation.btnAccept}
                   </button>
                 )}
                 {scanState === "approved" && (
                   <div className="px-3 py-1.5 bg-[#F4F9F4] text-lime-active border border-lime-green/30 font-mono text-[10px] font-black rounded flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5" /> MERGED GREEN
+                    <ShieldCheck className="w-3.5 h-3.5" /> {t.automation.mergedGreen}
                   </div>
                 )}
               </div>
@@ -112,26 +114,26 @@ export default function AutomationSection() {
             <div className="grid grid-cols-2 gap-4 mb-5 relative min-h-[190px]">
               {/* Image Column 1: FIGMA BASELINE TARGET */}
               <div className="border border-gray-200 rounded-lg p-3 bg-gray-50 flex flex-col justify-between">
-                <span className="text-[8px] font-mono text-gray-450 uppercase block border-b border-gray-200 pb-1 mb-2">Ref: FIGMA (Baseline)</span>
+                <span className="text-[8px] font-mono text-gray-455 uppercase block border-b border-gray-200 pb-1 mb-2">{t.automation.refFigma}</span>
                 {/* Simulated button clean schema */}
                 <div className="my-auto space-y-2">
                   <div className="w-10 h-10 rounded-full bg-[#5B7910]/40 flex items-center justify-center text-[#5B7910] text-[10px] font-bold mx-auto">G</div>
                   <div className="h-3 bg-gray-200 w-3/4 rounded mx-auto" />
                   <div className="px-3 py-1.5 bg-[#5B7910] text-white text-[9px] text-center rounded font-semibold w-24 mx-auto">
-                    Conectar
+                    {t.automation.btnLabelConnect}
                   </div>
                 </div>
               </div>
 
               {/* Image Column 2: MERGE CANDIDATE */}
               <div className="border border-gray-200 rounded-lg p-3 bg-gray-50 flex flex-col justify-between relative">
-                <span className="text-[8px] font-mono text-gray-450 uppercase block border-b border-gray-200 pb-1 mb-2">Candidato: PULL REQUEST</span>
+                <span className="text-[8px] font-mono text-gray-455 uppercase block border-b border-gray-200 pb-1 mb-2">{t.automation.candPr}</span>
                 
                 {/* Dynamic Content overlays depending on active scan states */}
                 {scanState === "scanning" && (
                   <div className="absolute inset-x-0 top-0 bottom-0 bg-white/80 z-20 flex flex-col justify-center items-center">
                     <div className="w-6 h-6 border-2 border-lime-green border-t-transparent rounded-full animate-spin mb-2" />
-                    <span className="text-[9px] font-mono font-bold animate-pulse text-gray-505">COMPLEX PIXEL COMPARE ENGINE...</span>
+                    <span className="text-[9px] font-mono font-bold animate-pulse text-gray-505">{t.automation.compareProgress}</span>
                   </div>
                 )}
 
@@ -143,13 +145,13 @@ export default function AutomationSection() {
                   {/* The button text is slightly misplaced towards bottom or too wide */}
                   {scanState === "diff" ? (
                     <div className="relative px-3 py-1.5 bg-[#FF00FF]/25 border-2 border-[#FF00FF] text-[9px] text-center rounded text-black font-semibold w-28 mx-auto animate-pulse flex items-center justify-center">
-                      <span className="text-[#FF00FF] font-black mr-1">[!]</span> Conectar
+                      <span className="text-[#FF00FF] font-black mr-1">[!]</span> {t.automation.btnLabelConnect}
                       {/* Highlight absolute diff overlay indicators */}
-                      <span className="absolute -top-3.5 -right-2 bg-[#FF00FF] text-white text-[7px] font-bold px-1 py-0.5 rounded shadow">WIDTH OUT 4px</span>
+                      <span className="absolute -top-3.5 -right-2 bg-[#FF00FF] text-white text-[7px] font-bold px-1 py-0.5 rounded shadow">{t.automation.widthOutBadge}</span>
                     </div>
                   ) : (
                     <div className={`px-3 py-1.5 text-[9px] text-center rounded font-semibold mx-auto transition-all ${scanState === "approved" ? 'bg-[#5B7910] text-white w-24' : 'bg-[#5B7910] text-white w-28'}`}>
-                      Conectar
+                      {t.automation.btnLabelConnect}
                     </div>
                   )}
                 </div>
@@ -159,16 +161,16 @@ export default function AutomationSection() {
             {/* Explanatory scanner bottom panel */}
             <div className="bg-gray-50 p-3 rounded-lg border border-gray-200 text-xs text-gray-505">
               {scanState === "idle" && (
-                <p>💡 <strong>Como testar:</strong> Toque no botão superior para rodar o teste automatizado no Pull Request. Ele vai comparar a versão codificada com o mock original.</p>
+                <p>💡 <strong>{t.automation.howToTest}</strong> {t.automation.howToTestText}</p>
               )}
               {scanState === "scanning" && (
-                <p>👁️ <strong>Análise de Visão Computacional:</strong> Nosso bot de Perceptual Regression está escaneando a matriz RGB do DOM contra a especificação do Figma...</p>
+                <p>👁️ <strong>{t.automation.scanStatusText}</strong></p>
               )}
               {scanState === "diff" && (
-                <p>🚨 <strong>Diferenças encontradas!</strong> O botão do PR foi codificado com largura esticada de 112px em vez de 96px padrão. Aceite a variação se foi proposital, ou o código será bloqueado no CI.</p>
+                <p>🚨 <strong>{t.automation.diffStatusText}</strong></p>
               )}
               {scanState === "approved" && (
-                <p>💚 <strong>Integração aprovada!</strong> O repositório aceitou a variação e o git pipeline está verde. Sem digitações erradas, sem retrabalho pós-produção.</p>
+                <p>💚 <strong>{t.automation.approvedStatusText}</strong></p>
               )}
             </div>
           </motion.div>
@@ -177,3 +179,4 @@ export default function AutomationSection() {
     </section>
   );
 }
+

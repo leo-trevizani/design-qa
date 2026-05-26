@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
 import { TrendingUp, AlertTriangle, Hammer, Sparkles, Scale, RefreshCw } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function DesignDebtSection() {
+  const { t } = useLanguage();
   const [accumulatedReleases, setAccumulatedReleases] = useState(3);
 
   // Math simulation for design debt
@@ -45,22 +47,22 @@ export default function DesignDebtSection() {
           >
             <div className="flex items-center justify-between border-b border-[#DEE2E6] pb-4 mb-5">
               <div>
-                <h3 className="text-sm font-black text-black">Design Debt Compounder</h3>
-                <p className="text-[10px] text-gray-500 font-mono">SIMULADOR DE RECURSOS ACUMULADOS EM SPRINT RELEASES</p>
+                <h3 className="text-sm font-black text-black">{t.designDebt.sandboxTitle}</h3>
+                <p className="text-[10px] text-gray-500 font-mono">{t.designDebt.sandboxSub}</p>
               </div>
               <button 
                 onClick={() => setAccumulatedReleases(0)}
                 className="p-1 px-3 text-[10px] font-mono font-bold bg-white text-black border border-[#DEE2E6] rounded hover:border-black transition-all flex items-center gap-1.5 cursor-pointer"
               >
-                <RefreshCw className="w-3 h-3" /> Resetar Dívida
+                <RefreshCw className="w-3 h-3" /> {t.designDebt.btnReset}
               </button>
             </div>
 
             {/* Release Accumulator Slider Controls */}
             <div className="mb-6">
               <label className="flex justify-between items-center text-xs font-bold text-gray-700 mb-2 font-mono">
-                <span>NÚMERO DE Sprints SEM DEsigner QA:</span>
-                <span className="text-lg text-amber-600 font-black">{accumulatedReleases} releases consecutivas</span>
+                <span>{t.designDebt.sliderLabelPre}</span>
+                <span className="text-lg text-amber-600 font-black">{accumulatedReleases} {t.designDebt.sliderLabelPost}</span>
               </label>
               <input 
                 type="range" 
@@ -71,58 +73,58 @@ export default function DesignDebtSection() {
                 className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amber-600 focus:outline-none"
               />
               <div className="flex justify-between text-[9px] text-gray-400 font-mono mt-1">
-                <span>STARTUP CLEAN (RELEASE ZERO)</span>
-                <span>DESINTEGRAÇÃO TOTAL (SPRINT 5)</span>
+                <span>{t.designDebt.sliderMin}</span>
+                <span>{t.designDebt.sliderMax}</span>
               </div>
             </div>
 
             <div className="grid grid-cols-3 gap-3 mb-6">
               <div className="bg-white border border-gray-200 rounded-lg p-3 text-center">
-                <span className="text-[10px] text-gray-400 font-bold uppercase font-mono block mb-1">Divergências</span>
+                <span className="text-[10px] text-gray-400 font-bold uppercase font-mono block mb-1">{t.designDebt.metricDivergences}</span>
                 <span className={`text-xl font-black ${accumulatedReleases > 2 ? 'text-amber-600' : 'text-black'}`}>
                   {designTokensMismatches}
                 </span>
-                <span className="text-[8px] text-gray-400 block mt-0.5">Tokens ausentes</span>
+                <span className="text-[8px] text-gray-400 block mt-0.5">{t.designDebt.metricDivergencesSub}</span>
               </div>
               <div className="bg-white border border-gray-200 rounded-lg p-3 text-center">
-                <span className="text-[10px] text-gray-400 font-bold uppercase font-mono block mb-1">Refugo Técnico</span>
+                <span className="text-[10px] text-gray-400 font-bold uppercase font-mono block mb-1">{t.designDebt.metricRework}</span>
                 <span className={`text-xl font-black ${accumulatedReleases > 2 ? 'text-amber-600' : 'text-black'}`}>
                   {devEffortReworkMultiplier}h
                 </span>
-                <span className="text-[8px] text-gray-400 block mt-0.5">Retrabalho futuro</span>
+                <span className="text-[8px] text-gray-400 block mt-0.5">{t.designDebt.metricReworkSub}</span>
               </div>
               <div className="bg-white border border-gray-200 rounded-lg p-3 text-center">
-                <span className="text-[10px] text-gray-400 font-bold uppercase font-mono block mb-1">Queda de UX</span>
+                <span className="text-[10px] text-gray-400 font-bold uppercase font-mono block mb-1">{t.designDebt.metricUxDrop}</span>
                 <span className={`text-xl font-black ${accumulatedReleases > 2 ? 'text-amber-600' : 'text-black'}`}>
                   {customerFrictionPercentage}%
                 </span>
-                <span className="text-[8px] text-gray-400 block mt-0.5">Frustração do usuário</span>
+                <span className="text-[8px] text-gray-400 block mt-0.5">{t.designDebt.metricUxDropSub}</span>
               </div>
             </div>
 
             {/* Live Preview Container experiencing cumulative wonkiness */}
             <div className={`bg-white border rounded-xl p-4 transition-all duration-300 ${getDivergenceClass(3)}`}>
               <div className="flex justify-between items-center mb-3">
-                <span className={`text-[10px] font-mono tracking-wider font-bold transition-all text-gray-500`}>Aplicações Financeiras CRM</span>
+                <span className={`text-[10px] font-mono tracking-wider font-bold transition-all text-gray-500`}>{t.designDebt.crmTitle}</span>
                 <span className={`px-2 py-0.5 text-[8px] font-bold rounded ${accumulatedReleases > 3 ? 'bg-red-500 text-white' : 'bg-lime-green/30 text-lime-active'}`}>
-                  {accumulatedReleases > 3 ? "URGENTE: INCONSISTENTE" : "APPROVED"}
+                  {accumulatedReleases > 3 ? t.designDebt.urgentBadge : t.designDebt.approvedBadge}
                 </span>
               </div>
 
               {/* Input section prone to broken offset */}
               <div className="space-y-2 text-left mb-3">
                 <span className={`text-[10px] font-semibold block transition-all ${getDivergenceClass(1)}`}>
-                  Valor a Transferir (TED):
+                  {t.designDebt.transferLabel}
                 </span>
                 <div className="w-full bg-gray-100 px-3 py-2 border rounded flex justify-between items-center">
-                  <span className="text-xs text-gray-400 font-mono">Digitando R$ 500,00...</span>
-                  <span className="text-xs text-gray-700 font-bold font-mono">PIX ATIVO</span>
+                  <span className="text-xs text-gray-400 font-mono">{t.designDebt.typingText}</span>
+                  <span className="text-xs text-gray-700 font-bold font-mono">{t.designDebt.pixActive}</span>
                 </div>
               </div>
 
               {/* Checkout Button suffering visual warp effects based on release counts */}
               <button className={`w-full py-2.5 font-bold text-xs rounded transition-all cursor-pointer ${accumulatedReleases === 0 ? 'bg-black text-white hover:bg-neutral-800' : ''} ${getDivergenceClass(2)}`}>
-                {accumulatedReleases === 0 ? "CONFIRMAR TRANSFERÊNCIA" : `CONFIRMA` + (accumulatedReleases > 2 ? " [ERRO TRUNCATE]" : "")}
+                {accumulatedReleases === 0 ? t.designDebt.btnConfirm : t.designDebt.btnConfirm + (accumulatedReleases > 2 ? ` ${t.designDebt.btnTruncateErr}` : "")}
               </button>
             </div>
           </motion.div>
@@ -137,7 +139,7 @@ export default function DesignDebtSection() {
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-700 text-[10px] md:text-xs font-mono font-bold tracking-wider uppercase mb-5 w-fit border border-amber-200"
           >
             <Scale className="w-3.5 h-3.5" />
-            <span>DESIGN DEBT • TECHNICAL LIABILITY</span>
+            <span>{t.designDebt.tag}</span>
           </motion.div>
 
           <motion.h2 
@@ -147,7 +149,7 @@ export default function DesignDebtSection() {
             transition={{ delay: 0.1 }}
             className="font-heebo text-4xl md:text-5xl lg:text-6xl font-black text-black tracking-tight leading-tight mb-6"
           >
-            O Peso Oculto do "Design Debt"
+            {t.designDebt.title}
           </motion.h2>
 
           <motion.div 
@@ -158,19 +160,19 @@ export default function DesignDebtSection() {
             className="space-y-4 font-sans text-sm md:text-base text-gray-600 leading-relaxed"
           >
             <p>
-              Ignorar pequenas discordâncias visuais e discrepâncias em padding, fontes ou cores herdadas em prol de releases mais rápidas contrai uma das dívidas mais perigosas no desenvolvimento: o <strong className="text-black font-semibold">Design Debt</strong>.
+              {t.designDebt.p1}
             </p>
             <p>
-              Individualmente, aplicar um espaçamento fixo provisório (<em>hardcoded fallback</em>) ou errar sutilmente um token de fonte parece irrelevante. "Depois arrumamos", diz-se.
+              {t.designDebt.p2}
             </p>
             <p>
-              Porém, após poucas sprints, o efeito cumulativo dessas pequenas negligências visuais fragmenta a experiência do usuário de forma letal:
+              {t.designDebt.p3}
             </p>
             <p className="border-l-4 border-amber-500 pl-4 my-4 italic text-gray-700 bg-amber-500/5 py-2 pr-3 rounded-r-lg">
-              "Para as pessoas, uma interface cheia de pequenas inconsistências parece amadora e inacabada. O cliente sente no estômago que a empresa não é confiável."
+              {t.designDebt.quote}
             </p>
             <p className="font-semibold text-black">
-              O Design Debt não mata por parada sistêmica súbita do servidor; ele mata por asfixia gradual da retenção do cliente.
+              {t.designDebt.summary}
             </p>
           </motion.div>
         </div>
@@ -178,3 +180,4 @@ export default function DesignDebtSection() {
     </section>
   );
 }
+

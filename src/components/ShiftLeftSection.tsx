@@ -1,47 +1,17 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { GitPullRequest, Search, FileCode, CheckCircle2, RefreshCcw, Layers } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function ShiftLeftSection() {
+  const { t } = useLanguage();
   const [activeStep, setActiveStep] = useState<number>(2);
 
-  const steps = [
-    {
-      id: 0,
-      title: "1. Figma Design Handoff",
-      subtitle: "Tokens Originais",
-      desc: "Designers definem cores, tipografias e grids diretamente nas APIs de Figma, encapsulados em Design Tokens JSON consumíveis de forma estática.",
-      icon: Layers,
-    },
-    {
-      id: 1,
-      title: "2. Storybook Sandbox",
-      subtitle: "Componentes Isolados",
-      desc: "Engenheiros constroem componentes de forma isolada do código-fonte legado. Isso evita bugs de herança parasitária de CSS global.",
-      icon: FileCode,
-    },
-    {
-      id: 2,
-      title: "3. Checkpoint Design QA",
-      subtitle: "Validação Síncrona",
-      desc: "O checkpoint visual ocorre ANTES do código ingressar nos testes funcionais. Se o componente divergir 1px do token inicial, ele não avança no pipeline.",
-      icon: Search,
-    },
-    {
-      id: 3,
-      title: "4. Teste Funcional Legado",
-      subtitle: "Funções Unitárias",
-      desc: "Uma vez que o componente físico está 100% calibrado na aparência, automatizadores criam asserções de clique, comportamento e transição lógicas.",
-      icon: CheckCircle2,
-    },
-    {
-      id: 4,
-      title: "5. CI/CD Release",
-      subtitle: "Segurança de Relações",
-      desc: "O deploy é realizado com risco de refugo visual tendendo a zero. Sem necessidade de abrir tickets complexos ou renegociar layouts em pós-produção.",
-      icon: GitPullRequest,
-    },
-  ];
+  const iconMap = [Layers, FileCode, Search, CheckCircle2, GitPullRequest];
+  const steps = t.shiftleft.steps.map((step, idx) => ({
+    ...step,
+    icon: iconMap[idx] || Layers,
+  }));
 
   return (
     <section className="relative min-h-screen w-full bg-white text-[#212529] flex flex-col justify-center px-6 py-12 md:px-16 lg:px-24 overflow-hidden border-b border-[#DEE2E6]">
@@ -59,7 +29,7 @@ export default function ShiftLeftSection() {
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black text-lime-green text-[10px] md:text-xs font-mono font-bold tracking-wider uppercase mb-5 w-fit"
           >
             <GitPullRequest className="w-3.5 h-3.5" />
-            <span>SHIFT-LEFT METHODOLOGY • NO REWORK</span>
+            <span>{t.shiftleft.tag}</span>
           </motion.div>
 
           <motion.h2 
@@ -69,7 +39,7 @@ export default function ShiftLeftSection() {
             transition={{ delay: 0.1 }}
             className="font-heebo text-4xl md:text-5xl lg:text-6xl font-black text-black tracking-tight leading-tight mb-6"
           >
-            Metodologia Design QA
+            {t.shiftleft.title}
           </motion.h2>
 
           <motion.div 
@@ -80,16 +50,16 @@ export default function ShiftLeftSection() {
             className="space-y-4 font-sans text-sm md:text-base text-gray-600 leading-relaxed"
           >
             <p>
-              Reabrir chamados de bugs visuais no JIRA pós-release é caro e exaustivo. Causa desânimo nos engenheiros e atrasa em semanas o cronograma de entrega do core do negócio.
+              {t.shiftleft.desc1}
             </p>
             <p className="font-semibold text-black">
-              A solução é o Shift-Left de Qualidade Visual.
+              {t.shiftleft.desc2}
             </p>
             <p>
-              Em vez de revisar as telas somente no ambiente final de staging, introduzimos o status de <strong className="text-black font-semibold">Design QA</strong> como uma etapa nativa, síncrona e isolada do pipeline. Estipulamos um contrato inabalável entre Design e Engenharia usando o <strong>Storybook</strong> como ferramenta de validação.
+              {t.shiftleft.desc3}
             </p>
             <p>
-              Nenhum componente sobe sem ser testado exaustivamente de maneira isolada. Se um desenvolvedor errar um espaçamento, o componente é rejeitado sutilmente logo no início.
+              {t.shiftleft.desc4}
             </p>
           </motion.div>
         </div>
@@ -102,8 +72,8 @@ export default function ShiftLeftSection() {
             viewport={{ once: true }}
             className="bg-[#F8F9FA] border border-[#DEE2E6] rounded-2xl p-6 shadow-globant-default"
           >
-            <h3 className="text-sm font-black text-black mb-1 text-left">Pipeline Visual Checkpoint</h3>
-            <p className="text-[10px] text-gray-400 font-mono mb-6 text-left">CLIQUE NOS PASSOS DO PIPELINE PARA ENTENDER OS PROCESSOS DE DESIGN QA</p>
+            <h3 className="text-sm font-black text-black mb-1 text-left">{t.shiftleft.sandboxTitle}</h3>
+            <p className="text-[10px] text-gray-400 font-mono mb-6 text-left">{t.shiftleft.sandboxSub}</p>
 
             {/* Steps timeline horizontal nodes indicator on big devices */}
             <div className="relative flex flex-col md:flex-row justify-between gap-4 md:gap-2 mb-8">
@@ -143,7 +113,7 @@ export default function ShiftLeftSection() {
                   className="space-y-2.5"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-[9px] font-mono bg-lime-green/20 text-[#5B7910] px-2 py-0.5 rounded font-extrabold uppercase">ETAPA ATIVA</span>
+                    <span className="text-[9px] font-mono bg-lime-green/20 text-[#5B7910] px-2 py-0.5 rounded font-extrabold uppercase">{t.shiftleft.activeStepTag}</span>
                     <h4 className="text-sm font-black text-black leading-none">{steps[activeStep].title}</h4>
                   </div>
                   <p className="text-xs text-gray-505 leading-relaxed">
@@ -154,8 +124,8 @@ export default function ShiftLeftSection() {
 
               {/* Status footer for this process flow */}
               <div className="mt-4 pt-4 border-t border-[#DEE2E6] flex items-center justify-between text-[10px] font-mono text-gray-400 font-bold">
-                <span>IMPACTO COM DESIGN QA: ZERO REWORK</span>
-                <span className="text-lime-active">{activeStep === 2 ? "⚠️ CRUCIAL DENTRO DO FIGMA CONTRACT" : "INTEGRATED"}</span>
+                <span>{t.shiftleft.impactTag}</span>
+                <span className="text-lime-active">{activeStep === 2 ? t.shiftleft.crucialTag : "INTEGRATED"}</span>
               </div>
             </div>
           </motion.div>
@@ -164,3 +134,4 @@ export default function ShiftLeftSection() {
     </section>
   );
 }
+

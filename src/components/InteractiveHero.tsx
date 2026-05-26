@@ -1,12 +1,14 @@
 import { useState, useRef, MouseEvent, TouchEvent } from "react";
 import { CheckCircle2, AlertTriangle, ArrowRight, RefreshCw, Zap } from "lucide-react";
 import { motion } from "motion/react";
+import { useLanguage } from "../context/LanguageContext";
 
 interface InteractiveHeroProps {
   onCtaclick: () => void;
 }
 
 export default function InteractiveHero({ onCtaclick }: InteractiveHeroProps) {
+  const { t } = useLanguage();
   const [sliderPosition, setSliderPosition] = useState<number>(50); // percentage (0 - 100)
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -43,7 +45,7 @@ export default function InteractiveHero({ onCtaclick }: InteractiveHeroProps) {
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-lime-green/15 border border-lime-green/30 mb-5 text-[10px] md:text-xs text-lime-active tracking-wider font-bold uppercase"
         >
           <Zap className="w-3.5 h-3.5 text-lime-active" />
-          <span>PAUTA DA GUILDA • COOPERAÇÃO DESIGN & QUALIDADE</span>
+          <span>{t.hero.agenda}</span>
         </motion.div>
 
         <motion.h1 
@@ -52,7 +54,7 @@ export default function InteractiveHero({ onCtaclick }: InteractiveHeroProps) {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="font-heebo text-5xl sm:text-6xl lg:text-8xl font-black text-black tracking-tight mb-6 leading-tight"
         >
-          Design & Quality Engineering
+          {t.hero.title}
         </motion.h1>
 
         <motion.p 
@@ -61,7 +63,7 @@ export default function InteractiveHero({ onCtaclick }: InteractiveHeroProps) {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="font-heebo text-sm sm:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed"
         >
-          Como o time de Product Design pode atuar de forma síncrona com os engenheiros de qualidade para automatizar asserções de layout, eliminar re-work pós-release e blindar o produto.
+          {t.hero.desc}
         </motion.p>
 
 
@@ -89,24 +91,24 @@ export default function InteractiveHero({ onCtaclick }: InteractiveHeroProps) {
                 {/* Mock Visual Error Element */}
                 <div className="flex items-center gap-2 text-[#DE3B3B] bg-[#DE3B3B]/10 border border-[#DE3B3B]/30 px-3 py-1.5 rounded-lg w-fit text-[10px] font-bold">
                   <AlertTriangle className="w-3.5 h-3.5" />
-                  <span>LENTIDÃO & RE-TRABALHO: 12 Erros de layout apontados na Release</span>
+                  <span>{t.hero.leftTag}</span>
                 </div>
 
                 {/* UI with bugs */}
                 <div className="max-w-md bg-white border-2 border-dashed border-[#DE3B3B]/40 rounded-xl p-5 mx-auto w-full my-auto opacity-95 text-left scale-[0.93] skew-y-1 relative shadow-sm">
-                  <span className="absolute -top-2.5 -right-2 bg-[#DE3B3B] text-white text-[8px] font-bold px-1.5 py-0.5 rounded">ALINHAMENTO QUEBRADO</span>
+                  <span className="absolute -top-2.5 -right-2 bg-[#DE3B3B] text-white text-[8px] font-bold px-1.5 py-0.5 rounded">{t.hero.leftBugTitle}</span>
                   <div className="w-12 h-12 rounded-lg bg-gray-200 mb-3 animate-pulse" />
                   <div className="h-4 bg-gray-300 w-3/4 rounded mb-2" />
                   <div className="h-3 bg-gray-200 w-5/6 rounded mb-5" />
                   <div className="flex justify-between items-center">
-                    <div className="w-18 h-7 bg-[#DE3B3B]/15 border border-[#DE3B3B]/40 rounded-md text-center text-[9px] pt-1.5 text-[#DE3B3B] font-bold">BUG: Text Over</div>
+                    <div className="w-18 h-7 bg-[#DE3B3B]/15 border border-[#DE3B3B]/40 rounded-md text-center text-[9px] pt-1.5 text-[#DE3B3B] font-bold">{t.hero.leftTextOver}</div>
                     <div className="w-24 h-6 bg-gray-200 rounded" />
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between text-gray-500 font-mono text-[9px] border-t border-gray-200 pt-2">
-                  <span>STATUS: REVISÃO COMPLEXA PÓS-PROD</span>
-                  <span className="text-[#DE3B3B] font-bold">REWRITING CODE // 40h perdidas</span>
+                  <span>{t.hero.leftStatus}</span>
+                  <span className="text-[#DE3B3B] font-bold">{t.hero.leftLostHours}</span>
                 </div>
               </div>
             </div>
@@ -120,26 +122,26 @@ export default function InteractiveHero({ onCtaclick }: InteractiveHeroProps) {
                 {/* Mock Perfect QA Tag */}
                 <div className="flex items-center gap-2 text-[#5B7910] bg-lime-green/20 border border-lime-green/45 px-3 py-1.5 rounded-lg w-fit text-[10px] font-bold ml-auto">
                   <CheckCircle2 className="w-3.5 h-3.5 text-lime-active" />
-                  <span>ZERO ERROS: Design Tokens validados antes de compilar</span>
+                  <span>{t.hero.rightTag}</span>
                 </div>
 
                 {/* Perfect UI aligned */}
                 <div className="max-w-md bg-white border border-lime-green/40 rounded-xl p-5 mx-auto w-full my-auto text-left relative shadow-globant-default">
-                  <span className="absolute -top-2.5 -right-2 bg-lime-green text-black text-[8px] font-bold px-1.5 py-0.5 rounded">PIXEL PERFECT</span>
+                  <span className="absolute -top-2.5 -right-2 bg-lime-green text-black text-[8px] font-bold px-1.5 py-0.5 rounded">{t.hero.rightPixelPerfect}</span>
                   <div className="w-12 h-12 rounded-lg bg-lime-green/15 flex items-center justify-center text-lime-active mb-3 border border-lime-green/25">
                     <Zap className="w-5 h-5 text-lime-active" />
                   </div>
-                  <div className="h-4 bg-lime-green/10 border-l-2 border-lime-green w-3/4 rounded-sm mb-2 px-2 text-[10px] text-black flex items-center font-extrabold font-system">100% Match com Mockup</div>
-                  <p className="text-[10px] text-gray-500 mb-5 leading-relaxed font-system">Handoff limpo de tokens. Otimizações de CSS aplicadas diretamente por QA.</p>
+                  <div className="h-4 bg-lime-green/10 border-l-2 border-lime-green w-3/4 rounded-sm mb-2 px-2 text-[10px] text-black flex items-center font-extrabold font-system">{t.hero.rightMatch}</div>
+                  <p className="text-[10px] text-gray-500 mb-5 leading-relaxed font-system">{t.hero.rightHandoff}</p>
                   <div className="flex justify-between items-center">
-                    <div className="px-3 py-1 bg-lime-green text-black rounded-full text-[9px] font-extrabold">Aprovado pelo Design</div>
+                    <div className="px-3 py-1 bg-lime-green text-black rounded-full text-[9px] font-extrabold">{t.hero.rightApproved}</div>
                     <div className="w-24 h-6 bg-lime-green/10 rounded border border-lime-green/20" />
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between text-gray-500 font-mono text-[9px] border-t border-gray-250 pt-2">
-                  <span className="text-lime-active font-bold">PIPELINE VERIFIED IN CI</span>
-                  <span className="text-gray-500">100% AUTOMATION MATCH</span>
+                  <span className="text-lime-active font-bold">{t.hero.rightPipeline}</span>
+                  <span className="text-gray-500">{t.hero.rightAutoMatch}</span>
                 </div>
               </div>
             </div>
@@ -160,14 +162,15 @@ export default function InteractiveHero({ onCtaclick }: InteractiveHeroProps) {
       {/* Trust Signatures footer of primary fold */}
       <div className="border-t border-[#DEE2E6] pt-5 mt-6 flex flex-col md:flex-row items-center justify-between text-gray-400 font-mono text-[10px] z-10 font-bold">
         <div className="flex items-center gap-1">
-          <span className="text-gray-500">PIXEL-PERFECT DESIGN FOR LARGE SCALE SYSTEM RELEASES</span>
+          <span className="text-gray-500">{t.hero.footerLeft}</span>
         </div>
         <div className="mt-2 md:mt-0 flex gap-4 text-gray-400">
-          <span>ISO 27001 VISUAL QUALITY</span>
+          <span>{t.hero.footerRight1}</span>
           <span>•</span>
-          <span>ZERO CODESYNC REWORK GUARANTEE</span>
+          <span>{t.hero.footerRight2}</span>
         </div>
       </div>
     </section>
   );
 }
+

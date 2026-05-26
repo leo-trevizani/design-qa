@@ -1,39 +1,89 @@
 import { useState } from "react";
 import { ChevronDown, Globe, Sparkles, MessageSquare, Menu, X, ArrowRight, ShieldCheck, Cpu, Layout } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { useLanguage } from "../context/LanguageContext";
 
 interface NavbarProps {
   onOpenContact: () => void;
 }
 
+const navbarTranslations = {
+  pt: {
+    contactUs: "Fale Conosco",
+    sparkText: "⚡ Desenvolvido sob Modelo Studio Design QA",
+    offering: "Nossa Oferta",
+    offeringDesc1: "Automação de Design QA",
+    offeringSub1: "Automatize asserções de regressão visual no CI/CD",
+    offeringDesc2: "Sincronização Figma-Código",
+    offeringSub2: "Mantenha tokens de layout sincronizados com os estilos React",
+    offeringDesc3: "Auditorias de Deformação Visual",
+    offeringSub3: "Revisão profunda de alinhamento de pixel e contraste",
+    about: "Sobre nós",
+    aboutDesc1: "O Modelo de Estúdio",
+    aboutSub1: "Como nossa equipe de design e qualidade atua junta",
+    aboutDesc2: "Nossa Metodologia",
+    aboutSub2: "Reduzindo o retrabalho pós-produção a zero absoluto",
+    insights: "Insights",
+    insightsDesc1: "Relatórios & Cases",
+    insightsSub1: "Como aceleramos entregas em até 4x em grandes apps",
+    careers: "Carreiras",
+    investors: "Investidores"
+  },
+  es: {
+    contactUs: "Contáctanos",
+    sparkText: "⚡ Desarrollado bajo Modelo Studio Design QA",
+    offering: "Nuestra Oferta",
+    offeringDesc1: "Automatización de Design QA",
+    offeringSub1: "Automatice aserciones de regresión visual en CI/CD",
+    offeringDesc2: "Sincronización Figma-Código",
+    offeringSub2: "Mantenga tokens de maquetación sincronizados con React",
+    offeringDesc3: "Auditorías de Defectos Visuales",
+    offeringSub3: "Revisión profunda del contraste y alineación de píxeles",
+    about: "Nosotros",
+    aboutDesc1: "El Modelo de Estudio",
+    aboutSub1: "Cómo trabaja nuestro equipo de diseño y calidad integrado",
+    aboutDesc2: "Nuestra Metodología",
+    aboutSub2: "Reduciendo el retrabalho post-lanzamiento a cero absoluto",
+    insights: "Insights",
+    insightsDesc1: "Reportes & Casos",
+    insightsSub1: "Cómo aceleramos entregas hasta 4 veces en apps enterprise",
+    careers: "Carreras",
+    investors: "Inversores"
+  }
+};
+
 export default function Navbar({ onOpenContact }: NavbarProps) {
+  const { language, setLanguage } = useLanguage();
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+
+  const localT = navbarTranslations[language];
 
   const navItems = [
     { 
-      name: "Our Offering", 
+      name: localT.offering, 
       dropdownItems: [
-        { title: "Design QA Automation", desc: "Automate visual regression checks in CI/CD pipeline", icon: Cpu },
-        { title: "Figma to Code Sync", desc: "Keep layout tokens synchronized with React styles", icon: Layout },
-        { title: "Visual Defect Audits", desc: "Comprehensive review of pixel alignment and layout", icon: ShieldCheck }
+        { title: localT.offeringDesc1, desc: localT.offeringSub1, icon: Cpu },
+        { title: localT.offeringDesc2, desc: localT.offeringSub2, icon: Layout },
+        { title: localT.offeringDesc3, desc: localT.offeringSub3, icon: ShieldCheck }
       ] 
     },
     { 
-      name: "About", 
+      name: localT.about, 
       dropdownItems: [
-        { title: "The Studio Model", desc: "How our specialized design & QA teams work together", icon: Layout },
-        { title: "Our Methodology", desc: "Reducing post-release rework to absolute zero", icon: ShieldCheck }
+        { title: localT.aboutDesc1, desc: localT.aboutSub1, icon: Layout },
+        { title: localT.aboutDesc2, desc: localT.aboutSub2, icon: ShieldCheck }
       ] 
     },
     { 
-      name: "Insights", 
+      name: localT.insights, 
       dropdownItems: [
-        { title: "Reports & Case Studies", desc: "How we accelerated delivery by 4x for top enterprise apps", icon: Cpu }
+        { title: localT.insightsDesc1, desc: localT.insightsSub1, icon: Cpu }
       ] 
     },
-    { name: "Careers", dropdownItems: null },
-    { name: "Investors", dropdownItems: null }
+    { name: localT.careers, dropdownItems: null },
+    { name: localT.investors, dropdownItems: null }
   ];
 
   return (
@@ -106,7 +156,7 @@ export default function Navbar({ onOpenContact }: NavbarProps) {
           onClick={onOpenContact}
           className="text-xs text-[#FFFFFF] hover:text-lime-green font-medium cursor-pointer transition-all border-b border-transparent hover:border-lime-green py-1"
         >
-          Contact Us
+          {localT.contactUs}
         </button>
 
         {/* Custom Green spark button inspired by attachments circular toggle icon */}
@@ -117,15 +167,51 @@ export default function Navbar({ onOpenContact }: NavbarProps) {
             </div>
           </div>
           <div className="absolute right-0 top-12 scale-0 group-hover/spark:scale-100 bg-[#212529] border border-[#343A40] text-[10px] px-3 py-1.5 rounded-lg text-white font-medium whitespace-nowrap transition-transform origin-top-right shadow-lg">
-            ⚡ Engineered with Design QA Studio Model
+            {localT.sparkText}
           </div>
         </div>
 
         {/* Language selector */}
-        <div className="flex items-center gap-1 text-xs text-[#FFFFFF] font-medium cursor-pointer hover:text-lime-green transition-all">
-          <Globe className="w-3.5 h-3.5 text-[#6C757D]" />
-          <span>EN</span>
-          <ChevronDown className="w-3 h-3 text-[#6C757D]" />
+        <div 
+          className="relative"
+          onMouseEnter={() => setLangDropdownOpen(true)}
+          onMouseLeave={() => setLangDropdownOpen(false)}
+        >
+          <div className="flex items-center gap-1 text-xs text-[#FFFFFF] font-medium cursor-pointer hover:text-lime-green transition-all py-2">
+            <Globe className="w-3.5 h-3.5 text-[#6C757D]" />
+            <span className="uppercase">{language}</span>
+            <ChevronDown className="w-3 h-3 text-[#6C757D]" />
+          </div>
+
+          <AnimatePresence>
+            {langDropdownOpen && (
+              <motion.div 
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 5 }}
+                className="absolute right-0 top-8 bg-[#1E2225] border border-[#343A40] rounded-lg shadow-lg py-1.5 w-24 z-50 text-left"
+              >
+                <button 
+                  onClick={() => {
+                    setLanguage("pt");
+                    setLangDropdownOpen(false);
+                  }}
+                  className={`w-full py-1.5 px-3 text-xs font-bold font-mono text-left block hover:bg-lime-green/10 ${language === "pt" ? 'text-lime-green' : 'text-gray-300'}`}
+                >
+                  PT - Port
+                </button>
+                <button 
+                  onClick={() => {
+                    setLanguage("es");
+                    setLangDropdownOpen(false);
+                  }}
+                  className={`w-full py-1.5 px-3 text-xs font-bold font-mono text-left block hover:bg-lime-green/10 ${language === "es" ? 'text-lime-green' : 'text-gray-300'}`}
+                >
+                  ES - Esp
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
 
@@ -162,6 +248,23 @@ export default function Navbar({ onOpenContact }: NavbarProps) {
                   )}
                 </div>
               ))}
+              
+              {/* Language Selection inside mobile drawer */}
+              <div className="flex gap-4 border-b border-white/5 pb-4 mt-2">
+                <button 
+                  onClick={() => setLanguage("pt")}
+                  className={`text-xs font-bold font-mono py-1 px-3.5 rounded-full border ${language === "pt" ? 'bg-lime-green text-black border-lime-green' : 'text-white border-white/20'}`}
+                >
+                  PT (PORTUGUÊS)
+                </button>
+                <button 
+                  onClick={() => setLanguage("es")}
+                  className={`text-xs font-bold font-mono py-1 px-3.5 rounded-full border ${language === "es" ? 'bg-lime-green text-black border-lime-green' : 'text-white border-white/20'}`}
+                >
+                  ES (ESPAÑOL)
+                </button>
+              </div>
+
               <div className="flex items-center justify-between pt-2">
                 <button 
                   onClick={() => {
@@ -170,7 +273,7 @@ export default function Navbar({ onOpenContact }: NavbarProps) {
                   }}
                   className="bg-lime-green text-black px-6 py-2.5 rounded-full text-xs font-bold hover:bg-lime-hover transition-all w-full text-center"
                 >
-                  Contact Us
+                  {localT.contactUs}
                 </button>
               </div>
             </div>
@@ -180,3 +283,4 @@ export default function Navbar({ onOpenContact }: NavbarProps) {
     </nav>
   );
 }
+
