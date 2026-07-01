@@ -63,20 +63,7 @@ export default function WYSIATISection({ onOpenContact }: WYSIATISectionProps) {
             </p>
           </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="mt-6 flex flex-wrap gap-4"
-          >
-            <button 
-              onClick={onOpenContact}
-              className="px-6 py-3 bg-black hover:bg-[#252525] text-white font-extrabold text-xs tracking-wider uppercase rounded-full transition-all active:scale-95 cursor-pointer shadow-md"
-            >
-              {t.wysiati.btn}
-            </button>
-          </motion.div>
+
         </div>
 
         {/* Right Side: Interactive Subconscious Cognitive trust simulator */}

@@ -244,20 +244,21 @@ export default function App() {
                       <span className="text-xs font-bold uppercase tracking-widest text-lime-green bg-lime-green/10 px-4 py-1.5 rounded-full border border-lime-green/20 mb-6">
                         {t.ctaSection.tag}
                       </span>
-                      <h2 className="font-heebo text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-6 flex flex-col gap-2">
-                        <span>{t.ctaSection.titleLine1}</span>
-                        <span>{t.ctaSection.titleLine2}</span>
+                      <h2 className="font-heebo text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-6">
+                        {t.ctaSection.titleLine1} {t.ctaSection.titleLine2}
                       </h2>
                       <p className="font-heebo text-xs sm:text-sm text-gray-400 max-w-xl mx-auto mb-8 leading-relaxed">
                         {t.ctaSection.desc}
                       </p>
                       
-                      <button 
-                        onClick={openContactModal}
-                        className="px-10 py-4 bg-lime-green hover:bg-lime-hover text-black font-extrabold text-xs tracking-wider uppercase rounded-full shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all text-center cursor-pointer"
+                      <a 
+                        href="https://www.linkedin.com/in/leotrevizani/edit/forms/recommendation/write/?profileFormEntryPoint=Detail&profileUrn=urn%3Ali%3Afsd_profile%3AACoAABhGw-ABu9ay-SeCr6qCI4LLaRSYaY-bkuI"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block px-10 py-4 bg-lime-green hover:bg-lime-hover text-black font-extrabold text-xs tracking-wider uppercase rounded-full shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all text-center cursor-pointer"
                       >
                         {t.ctaSection.button}
-                      </button>
+                      </a>
                     </div>
                   </div>
                 )}
